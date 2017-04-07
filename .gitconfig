@@ -1,0 +1,6 @@
+[user]
+	email = quaffle97@gmail.com
+[push]
+	default = simple
+[alias]
+	tree = log --graph --oneline --decorate --all --abbrev-commit --color
