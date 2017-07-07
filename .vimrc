@@ -63,6 +63,10 @@ set undodir=~/.vim/.undo// "for .un~ files
 
 
 
+"Filename autocomplete
+set wildmode=longest,list,full
+set wildmenu
+
 "Colors bs
 set syntax
 set t_Co=256 "hopefully force 256-color to work
