@@ -102,6 +102,7 @@ fi
 
 if [ -f ~/.localrc ]; then
     . ~/.bash_local
+    #. ~/.localrc #maybe switch to bash_localrc
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -116,6 +117,9 @@ if ! shopt -oq posix; then
 fi
 
 export EDITOR=vim
+
+#make history work intelligently with multiple terminals
+export PROMPT_COMMAND='history -a'
 
 #setup dircolors
 eval $(dircolors /home/george/.dir_colors/dircolors)
