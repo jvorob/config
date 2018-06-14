@@ -80,7 +80,8 @@ let g:solarized_termcolors=256  "if term uses non-solarized pallete
 set background=dark
 colorscheme solarized
 
-set syntax
+"set syntax
+syntax enable
 
 "set colorcolumn=81
 "set cursorline
