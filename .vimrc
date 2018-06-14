@@ -45,7 +45,8 @@ set hlsearch                        "Highlight Search
 set incsearch                       "Highlight incrementally
 
 "Clear search and fix syntax
-nnoremap <C-l> :nohlsearch<CR>:syntax sync fromstart<CR><C-l>
+"also do checktime (reloads files)
+nnoremap <C-l> :nohlsearch<CR>:syntax sync fromstart<CR>:checktime<CR><C-l>
 set magic
 
 "Tabbing
@@ -67,17 +68,24 @@ set undodir=~/.vim/.undo// "for .un~ files
 set wildmode=longest,list,full
 set wildmenu
 
-"Colors bs
-set syntax
+" ======= Colors bs ========
+"
 set t_Co=256 "hopefully force 256-color to work
-let g:solarized_termcolors=256 "degrade solarized to use terminal colors
+
+"On laptop only
+"let g:solarized_use16 = 1
+"colorscheme solarized8
+
+let g:solarized_termcolors=256  "if term uses non-solarized pallete
 set background=dark
 colorscheme solarized
+
+set syntax
+
 "set colorcolumn=81
 "set cursorline
-"set guifont=Consolas:h10:cANSI
-"
-"
+
+
 
 "Folds
 "fold.txt
@@ -88,3 +96,22 @@ set foldmethod=marker
 
 nohlsearch
 
+
+
+
+
+" =========== PLUGINS ===========
+" Gitgutter
+"let g:gitgutter_enabled = 1
+set updatetime=400 "default 4000 (4sec), makes signs faster
+"set signcolumn=yes "force sign column always
+
+" youcompleteme
+if !exists("g:ycm_semantic_triggers")
+  let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers['typescript'] = ['.']
+
+
+"Nerdtree
+nnoremap <F4> :NERDTreeToggle<CR>

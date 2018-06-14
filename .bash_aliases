@@ -1,4 +1,19 @@
-#!/bin/bash
+
+export EDITOR=vim
+
+make history work intelligently with multiple terminals
+export PROMPT_COMMAND='history -a'
+
+
+
+#load .local_bashrc if possible
+if [ -f ~/.local_bashrc ]; then
+    . ~/.local_bashrc
+fi
+
+#make history work intelligently with multiple terminals
+export PROMPT_COMMAND='history -a'
+
 
 alias cl='clear'
 
@@ -28,11 +43,5 @@ alias gs="git status"
 alias gt="git tree"
 
 
-#lets npm run modules without bleh
-function npm-do { (PATH=$(npm bin):$PATH; eval $@;) }
-
-# schedule for school (on desktop machine)
-alias sched="eog ~/Dropbox/schedule_spring_17b.png"
-
-# enable the fuck
-eval "$(thefuck --alias)"
+#setup dircolors
+#eval $(dircolors)
