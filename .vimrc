@@ -99,6 +99,12 @@ nohlsearch
 
 
 
+" == Autocmds
+"FocusGained doesnt work in tmux
+augroup vimrc
+    autocmd!
+    au WinEnter,FocusGained * checktime
+augroup END
 
 
 " =========== PLUGINS ===========
