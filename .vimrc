@@ -70,15 +70,15 @@ set wildmenu
 
 " ======= Colors bs ========
 "
-set t_Co=256 "hopefully force 256-color to work
+"set t_Co=256 "hopefully force 256-color to work
 
 "On laptop only
 "let g:solarized_use16 = 1
 "colorscheme solarized8
 
-let g:solarized_termcolors=256  "if term uses non-solarized pallete
+"let g:solarized_termcolors=256  "if term uses non-solarized pallete
 set background=dark
-colorscheme solarized
+"colorscheme solarized
 
 "set syntax
 syntax enable
