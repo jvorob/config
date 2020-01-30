@@ -4,9 +4,12 @@
   cleanlog =%w(90,0,8)%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
 [user]
    email = janet.vorobyeva@gmail.com
+   name = "Janet Vorobyeva"
 [push]
    default = simple
 [alias]
   tree = log --graph --pretty=tree --all --color
   tree2 = log --graph --pretty=tree2 --date=relative --all --color
   l = log --pretty=cleanlog
+[core]
+  excludesFile = .gitignore_global
