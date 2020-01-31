@@ -12,4 +12,4 @@
   tree2 = log --graph --pretty=tree2 --date=relative --all --color
   l = log --pretty=cleanlog
 [core]
-  excludesFile = .gitignore_global
+  excludesFile = ~/.gitignore_global
