@@ -1,5 +1,6 @@
 
 export EDITOR=vim
+export IGNOREEOF=10 #Will only exit after 10 consecutive ctrl-Ds
 
 #load .local_bashrc if possible
 if [ -f ~/.local_bashrc ]; then
