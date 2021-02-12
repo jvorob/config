@@ -21,9 +21,9 @@ if [ ! -w "$HOME_DIR" ]; then
 fi
 
 #NOTE: wont clobber existing files
-echo cp -n "$SCRIPT_DIR"/.bash_aliases "$HOME_DIR/"
-echo cp -n "$SCRIPT_DIR"/.bashrc "$HOME_DIR/"
-echo cp -n "$SCRIPT_DIR"/.gitconfig "$HOME_DIR/"
-echo cp -n "$SCRIPT_DIR"/.gitignore_global "$HOME_DIR/"
-echo cp -n "$SCRIPT_DIR"/.tmux.conf "$HOME_DIR/"
-echo cp -n "$SCRIPT_DIR"/.vimrc "$HOME_DIR/"
+cp -n "$SCRIPT_DIR"/.bash_aliases "$HOME_DIR/"
+cp -n "$SCRIPT_DIR"/.bashrc "$HOME_DIR/"
+cp -n "$SCRIPT_DIR"/.gitconfig "$HOME_DIR/"
+cp -n "$SCRIPT_DIR"/.gitignore_global "$HOME_DIR/"
+cp -n "$SCRIPT_DIR"/.tmux.conf "$HOME_DIR/"
+cp -n "$SCRIPT_DIR"/.vimrc "$HOME_DIR/"
