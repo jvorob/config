@@ -10,7 +10,8 @@ fi
 #make history work intelligently with multiple terminals
 export PROMPT_COMMAND='history -a'
 
-
+#Generic stuff
+alias c.="cd .."
 alias cl='clear'
 
 # some more ls aliases
@@ -24,20 +25,26 @@ alias igrep='grep -i --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-#fix xclip for ubuntu
-alias xclip='xclip -selection clipboard'
-alias xcopy='xclip -in -selection clipboard '
-alias xpaste='xclip -out -selection clipboard'
-# use like:
-#   `foo | xclip -in`
-#   `xclip -out | foo`
-
-alias c.="cd .."
-
+# Git stuff
 alias g="git"
 alias gs="git status"
 alias gt="git tree"
+alias gc="git checkout"
 
+# Etc
+alias py3="python3"
+alias sctl="systemctl"
+
+
+
+
+# #fix xclip for ubuntu
+# alias xclip='xclip -selection clipboard'
+# alias xcopy='xclip -in -selection clipboard '
+# alias xpaste='xclip -out -selection clipboard'
+# # use like:
+# #   `foo | xclip -in`
+# #   `xclip -out | foo`
 
 #setup dircolors
 #eval $(dircolors)
