@@ -35,6 +35,11 @@ alias gc="git checkout"
 alias py3="python3"
 alias sctl="systemctl"
 
+# http://cheat.sh cool website, can curl e.g. cheat.sh/tar
+cheat() {
+    curl "cheat.sh/$@"
+}
+
 
 
 
