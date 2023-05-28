@@ -37,7 +37,7 @@ alias sctl="systemctl"
 
 # http://cheat.sh cool website, can curl e.g. cheat.sh/tar
 cheat() {
-    curl "cheat.sh/$@"
+    curl "http://cheat.sh/$@"
 }
 
 
