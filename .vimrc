@@ -15,22 +15,11 @@ set nu
 "" Default colorcolumn to 80 chars.
 set colorcolumn=80
 
-noremap <leader>ev :split ~/.vimrc<cr>
-noremap <leader>sv :source ~/.vimrc<cr>
-
-"Tabs
-noremap <F10> gt
-noremap <F9> gT
-
-" Toggle paste mode mode with <Leader>pp
-nnoremap <Leader>pp :set paste! paste?<CR>
-
-"Pasting (will paste last yanked thing, not just last deleted)
-"( I never use these, maybe remove? )
-" vnoremap <leader>p "0p
-" nnoremap <leader>p "0p
-" vnoremap <leader>P "0P
-" nnoremap <leader>P "0P
+"===================================================
+"
+"                  BASIC MAPPINGS
+"
+"===================================================
 
 "Move properly on wrapped lines
 nnoremap j gj
@@ -38,19 +27,46 @@ nnoremap k gk
 
 "Faster escape
 inoremap jk <esc>
+
+"Tabs
+noremap <F10> gt
+noremap <F9> gT
+
+" Fixing copy-paste to be sane (x doesn't modify yank buffers)
+nnoremap x "_x
+vnoremap x "_x
+" if we want to delete without cutting (this doesn't work quite right)
+" nnoremap <leader>d  "_d
+
 "Faster colon
 nnoremap ; :
+
+"===================================================
+"
+"                LEADER MAPPINGS
+"
+"===================================================
+
+noremap <leader>ev :split ~/.vimrc<cr>
+noremap <leader>sv :source ~/.vimrc<cr>
+
+"save, quit
+noremap <leader>w :w<cr>
+noremap <leader>q :q<cr>
+
+" clear trailing whitespace
+noremap <leader>cws :%s/\v\s+$//gc<CR>
+
+" Toggle paste mode mode with <leader>pp ( for pasting with ctrl-shift-v into term)
+nnoremap <leader>pp :set paste! paste?<CR>
 
 "Space foo => insert foo at cursor
 nnoremap <leader><Space> i<Space><esc>
 nnoremap <leader>; i;<esc>
 nnoremap <leader>, i,<esc>
-
-" save, quit
-noremap <leader>w :w<cr>
-noremap <leader>q :q<cr>
-
 "OLD, USED TO JUST BE ON <space>: "nnoremap <leader>i i_<esc>r
+
+"======= END LEADER MAPPINGS =======
 
 "Search options
 set ignorecase
@@ -76,13 +92,9 @@ set nobackup
 set undodir=~/.vim/.undo// "for .un~ files
 "set directory=~/.vim/.swp// "for swap files
 
-
-
 "Filename autocomplete
 set wildmode=longest,list,full
 set wildmenu
-
-
 
 
 "Folds
@@ -93,7 +105,6 @@ set wildmenu
 set foldmethod=marker
 
 nohlsearch
-
 
 
 " == Autocmds
