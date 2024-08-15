@@ -46,6 +46,10 @@ nnoremap <leader><Space> i<Space><esc>
 nnoremap <leader>; i;<esc>
 nnoremap <leader>, i,<esc>
 
+" save, quit
+noremap <leader>w :w<cr>
+noremap <leader>q :q<cr>
+
 "OLD, USED TO JUST BE ON <space>: "nnoremap <leader>i i_<esc>r
 
 "Search options
