@@ -1,7 +1,6 @@
 set nocompatible
 let mapleader=" "
 
-filetype plugin on
 
 "Numbering
 set number
@@ -128,7 +127,15 @@ Plug 'preservim/nerdtree'
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'morhetz/gruvbox'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+
+if has('nvim')
+    Plug 'neovim/nvim-lspconfig' " basic rust-analyzer client
+    Plug 'mrcjkb/rustaceanvim' " fancy rust-v:Pnalyzer client, ???
+else
+    Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+endif
+
+Plug 'rust-lang/rust.vim'
 "NOTE: If YCM doesn't work, can run install script manually:
 "    cd $HOME/.vim/plugged/YouCompleteMe
 "    python3 ./install.py
@@ -162,6 +169,11 @@ nnoremap <leader>jr :YcmCompleter GoToReferences<CR>
 " endif
 " let g:ycm_semantic_triggers['typescript'] = ['.']
 
+" Configure LSP stuff
+if has('nvim')
+    "lua require'lspconfig'.rust_analyzer.setup{}
+endif
+
 
 " PLUG: Nerdtree
 nnoremap <F4> :NERDTreeToggle<CR>
@@ -182,6 +194,7 @@ colorscheme gruvbox
 
 "set syntax
 syntax enable
+filetype plugin indent on
 
 "set colorcolumn=81
 "set cursorline
