@@ -13,3 +13,5 @@
   l = log --pretty=cleanlog
 [core]
   excludesFile = ~/.gitignore_global
+[init]
+  defaultBranch = main
