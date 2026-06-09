@@ -22,7 +22,7 @@ if [ ! -w "$HOME_DIR" ]; then
 fi
 
 if [[ "$#" -eq "2" && "$2" == "-f" ]]; then
-    #NOTE: wont clobber existing files
+    #NOTE: Clobbers existing files
     echo OVERWRITING EXISTING CONFIGS
     cp -f "$SCRIPT_DIR"/.bash_aliases "$HOME_DIR/"
     cp -f "$SCRIPT_DIR"/.bashrc "$HOME_DIR/"
@@ -40,4 +40,9 @@ else
     cp -n "$SCRIPT_DIR"/.tmux.conf "$HOME_DIR/"
     cp -n "$SCRIPT_DIR"/.vimrc "$HOME_DIR/"
 fi
+
+echo 'MANUALLY INSTALL:'
+echo '- config.ghostty        =>  ~/.config/ghostty/config.ghostty'
+echo '- helix_config.toml     =>  ~/.config/helix/config.toml'
+echo '- helix_languages.toml  =>  ~/.config/helix/languages.toml'
 

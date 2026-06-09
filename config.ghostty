@@ -1,0 +1,11 @@
+# Reload configs with
+theme = Neutron
+
+### Bitmap font: only valid at size 12 I think
+#       https://github.com/the-moonwitch/Cozette
+# NOTE: 
+#font-family = "Cozette"
+#font-size = 12
+
+# Alternative font:
+font-family = "Fira Code"
