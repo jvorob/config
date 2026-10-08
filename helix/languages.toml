@@ -1,0 +1,27 @@
+# NOTE: for reference / defaults, see 
+#    https://github.com/helix-editor/helix/blob/master/languages.toml
+
+[language-server.haskell-language-server] # hls config docs: https://haskell-language-server.readthedocs.io/en/latest/configuration.html#example-with-settings
+config.haskell.formattingProvider = "stylish-haskell" # default is "ormolu"
+config.haskell.checkParents = "OnSave" # default is "OnSave"
+config.haskell.maxCompletions = 2 # default  is 40
+
+[[language]]
+name = "haskell"
+roots = ["Setup.hs", "stack.yaml", "*.cabal"]
+auto-format = true
+
+[[language]]
+name = "c"
+indent = { tab-width=4, unit = "    " } # tab-width is render-width of tab characters, unit is what's used to indent
+#file-types = ["c", "h"] # default is just .c files
+# NOTE: .h files are by default considered to be cpp
+# need to either set tab-width=4 for cpp as well,
+# or need to override file-types here
+#   This setup still has inconsistency where .h uses tabs and .c uses spaces, but at least
+# the widths are correct
+
+[[language]]
+name = "cpp"
+indent = { tab-width=4, unit = "    " }
+
