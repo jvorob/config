@@ -12,7 +12,7 @@ set laststatus=2 "always display status line
 set nu
 
 "" Default colorcolumn to 80 chars.
-set colorcolumn=80
+"set colorcolumn=80
 
 "===================================================
 "
@@ -129,8 +129,13 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'morhetz/gruvbox'
 
 if has('nvim')
-    Plug 'neovim/nvim-lspconfig' " basic rust-analyzer client
-    Plug 'mrcjkb/rustaceanvim' " fancy rust-v:Pnalyzer client, ???
+    "Plug 'neovim/nvim-lspconfig' " basic rust-analyzer client
+    "Plug 'mrcjkb/rustaceanvim' " fancy rust-v:Pnalyzer client, ???
+    "Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
+    Plug 'VonHeikemen/lsp-zero.nvim'
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/nvim-cmp'
 else
     Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 endif
@@ -157,22 +162,7 @@ let g:gitgutter_enabled = 1
 set updatetime=400 "default 4000 (4sec), makes signs faster
 "set signcolumn=yes "force sign column always
 
-" PLUG: youcompleteme
-nnoremap <leader>yr :YcmRestartServer<CR>
-" YCM Jumps: they use the jumplist so can use Ctrl-O and Ctrl-I to go back/forward
-nnoremap <leader>jj :YcmCompleter GoTo<CR>
-nnoremap <leader>ji :YcmCompleter GoToInclude<CR>
-nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>jr :YcmCompleter GoToReferences<CR>
-" if !exists("g:ycm_semantic_triggers")
-"   let g:ycm_semantic_triggers = {}
-" endif
-" let g:ycm_semantic_triggers['typescript'] = ['.']
 
-" Configure LSP stuff
-if has('nvim')
-    "lua require'lspconfig'.rust_analyzer.setup{}
-endif
 
 
 " PLUG: Nerdtree
@@ -181,20 +171,115 @@ nnoremap <F4> :NERDTreeToggle<CR>
 
 " ======= Colors bs ========
 "
-set t_Co=256 "hopefully force 256-color to work
+"" set t_Co=256 "hopefully force 256-color to work
 "set termguicolors
 
 "On laptop only
 "let g:solarized_use16 = 1
 "colorscheme solarized8
-"let g:solarized_termcolors=256  "if term uses non-solarized pallete
-set background=light
+""let g:solarized_termcolors=256  "if term uses non-solarized pallete
+set background=dark
+
+"set background=light
 "colorscheme solarized
 colorscheme gruvbox
 
 "set syntax
-syntax enable
-filetype plugin indent on
+"syntax enable
+"filetype plugin indent on
 
 "set colorcolumn=81
 "set cursorline
+
+
+" Configure LSP stuff
+if has('nvim')
+lua << EOF
+    -- ============================================
+    --          NOTE: FOR FUTURE:
+    --          read thru this:
+    -- https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua
+
+
+    -- NOTE: rustaceanvim mutually exclusive with lspconfig setup
+    --vim.keymap.set('n', 'ge', function() vim.cmd.RustLsp('explainError') end)
+
+    --require('lsp_lines').setup()
+    --vim.diagnostic.config({ virtual_text = false, }) -- disable default diagnostic mode
+    --vim.diagnostic.config({ virtual_text = true, }) -- disable default diagnostic mode
+    --vim.diagnostic.config({ virtual_lines = { only_current_line = true } })
+    --vim.diagnostic.config({ virtual_lines = { highlight_whole_line = false }})
+    --vim.diagnostic.config({ virtual_lines = { highlight_whole_line = false, only_current_line = true } })
+    --vim.keymap.set( "", "<Leader>l", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
+
+    vim.keymap.set('n', '<Leader>l', '<cmd>lua vim.diagnostic.open_float()<cr>')
+    vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
+    vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
+
+    local lsp_zero = require('lsp-zero')
+    local lsp_attach = function(client, bufnr)
+        local opts = {buffer = bufnr}
+
+        vim.keymap.set('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
+        vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
+        vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
+        --vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
+        --vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
+        vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
+        vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
+        vim.keymap.set('n', '<Leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+        --vim.keymap.set({'n', 'x'}, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
+        --vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+    end
+
+    lsp_zero.extend_lspconfig({
+        sign_text=true,
+        lsp_attach = lsp_attach,
+        capabiliteis = require('cmp_nvim_lsp').default_capabilities()
+    })
+
+    require'lspconfig'.rust_analyzer.setup{}
+    ------ alt settings:
+    --    settings = { ['rust-analyzer'] = {
+    --            diagnostics = {
+    --                experimental = { enable = true },
+    --                enable = false;
+
+    local cmp = require('cmp')
+    local cmp_action = require('lsp-zero').cmp_action()
+    cmp.setup({
+        sources = { {name='nvim_lsp'}, },
+        mapping = cmp.mapping.preset.insert({
+            ['<C-j>']      = cmp.mapping.select_next_item({behavior = 'select'}),
+            ['<C-k>']      = cmp.mapping.select_prev_item({behavior = 'select'}),
+            ['<Cr>']       = cmp.mapping.confirm({select = false}),
+            ['<C-Space>']  = cmp.mapping.complete(),
+
+            ['<C-f>']      = cmp_action.vim_snippet_jump_forward(),
+            ['<C-b>']      = cmp_action.vim_snippet_jump_backward(),
+
+            ['<Tab>']      = cmp_action.tab_complete(),
+            ['<S-Tab>']    = cmp.mapping.select_prev_item({behavior = 'select'}),
+
+            ['<C-u>']      = cmp.mapping.scroll_docs(-4),
+            ['<C-d>']      = cmp.mapping.scroll_docs(4),
+        }),
+        snippet = {
+            expand = function(args) vim.snippet.expand(args.body) end,
+        },
+    })
+EOF
+
+else 
+    " PLUG: youcompleteme
+    nnoremap <leader>yr :YcmRestartServer<CR>
+    " YCM Jumps: they use the jumplist so can use Ctrl-O and Ctrl-I to go back/forward
+    nnoremap <leader>jj :YcmCompleter GoTo<CR>
+    nnoremap <leader>ji :YcmCompleter GoToInclude<CR>
+    nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
+    nnoremap <leader>jr :YcmCompleter GoToReferences<CR>
+    " if !exists("g:ycm_semantic_triggers")
+    "   let g:ycm_semantic_triggers = {}
+    " endif
+    " let g:ycm_semantic_triggers['typescript'] = ['.']
+endif
