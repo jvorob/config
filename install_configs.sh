@@ -50,9 +50,3 @@ else
     cp -n "$SCRIPT_DIR/helix/config.toml" "$HOME_DIR/.config/helix/"
     cp -n "$SCRIPT_DIR/helix/languages.toml" "$HOME_DIR/.config/helix/"
 fi
-
-echo 'MANUALLY INSTALL:'
-echo '- config.ghostty        =>  ~/.config/ghostty/config.ghostty'
-echo '- helix_config.toml     =>  ~/.config/helix/config.toml'
-echo '- helix_languages.toml  =>  ~/.config/helix/languages.toml'
-
