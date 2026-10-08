@@ -30,6 +30,11 @@ if [[ "$#" -eq "2" && "$2" == "-f" ]]; then
     cp -f "$SCRIPT_DIR"/.gitignore_global "$HOME_DIR/"
     cp -f "$SCRIPT_DIR"/.tmux.conf "$HOME_DIR/"
     cp -f "$SCRIPT_DIR"/.vimrc "$HOME_DIR/"
+    # This one we only need for graphical environments, so it's not necessary by default
+    echo 'SKIPPING: - config.ghostty  =>  ~/.config/ghostty/config.ghostty'
+    mkdir -p "$HOME_DIR/.config/helix"
+    cp -n "$SCRIPT_DIR/helix/config.toml" "$HOME_DIR/.config/helix/"
+    cp -n "$SCRIPT_DIR/helix/languages.toml" "$HOME_DIR/.config/helix/"
 else
     #NOTE: wont clobber existing files
     echo Copying configs without clobbering
@@ -39,6 +44,11 @@ else
     cp -n "$SCRIPT_DIR"/.gitignore_global "$HOME_DIR/"
     cp -n "$SCRIPT_DIR"/.tmux.conf "$HOME_DIR/"
     cp -n "$SCRIPT_DIR"/.vimrc "$HOME_DIR/"
+    # This one we only need for graphical environments, so it's not necessary by default
+    echo 'SKIPPING: - config.ghostty  =>  ~/.config/ghostty/config.ghostty'
+    mkdir -p "$HOME_DIR/.config/helix"
+    cp -n "$SCRIPT_DIR/helix/config.toml" "$HOME_DIR/.config/helix/"
+    cp -n "$SCRIPT_DIR/helix/languages.toml" "$HOME_DIR/.config/helix/"
 fi
 
 echo 'MANUALLY INSTALL:'
