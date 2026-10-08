@@ -49,7 +49,7 @@ push() {
     # New files can just be copied
     if [[ ! -f "$tgt_path" ]] ; then
         echo "  [NEW]   $repo_name => $HOME_DIR/$tgt_name"
-        #if cp -i "$repo_path" "$tgt_path" ; then true ; fi
+        cp "$repo_path" "$tgt_path"
 
     # Unchanged files can be ignored: notify of that
     elif diff -q >/dev/null "$repo_path" "$tgt_path" ; then
