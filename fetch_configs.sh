@@ -1,6 +1,10 @@
 #!/bin/bash
 set -eufo pipefail
 
+# ANSI codes, use with `echo -e`
+RED="\e[0;31m"
+CLEAR_STYLE="\e[0m"
+
 # Copies out configs to $1
 SCRIPT_DIR="$(dirname "$0")"
 
@@ -16,6 +20,7 @@ if [ ! -d "$HOME_DIR" ]; then
     exit 1
 fi
 
+
 # USAGE: gather TO FROM
 # TO is the in-repo location of the file
 # FROM is the actual on-system location of the config file, e.g. ~/.config/foo/foo.conf
@@ -29,8 +34,11 @@ gather() {
         dest="$source"
     fi
 
-    echo "  $dest <= $HOME_DIR/$source"
-    cp "$HOME_DIR/$source" "$SCRIPT_DIR/$dest"
+    if cp "$HOME_DIR/$source" "$SCRIPT_DIR/$dest" ; then
+        echo "  $dest <= $HOME_DIR/$source"
+    else
+        echo -e "  $RED[NOT FOUND] $HOME_DIR/$source$CLEAR_STYLE"
+    fi
 }
 
 echo Gathering all known configs from this system:
