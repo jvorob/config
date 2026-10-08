@@ -7,7 +7,14 @@ bufferline = "multiple" # shows multiple buffers as tab bar
 [keys.insert]
 j = { k = "normal_mode" } # Maps `jk` to exit insert mode
 
+[keys.normal]
+";" = { w = ":w" }
+
 [keys.normal.' ']
+# Toggle rendering whitespace
+w = ":toggle whitespace.render all none"
+
+# Clear trailing whitespace, yoinked off the internet
 S-s = [
     "save_selection",
     "select_all",

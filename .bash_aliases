@@ -35,11 +35,67 @@ alias gc="git checkout"
 alias py3="python3"
 alias sctl="systemctl"
 
+# if bat is installed, set it up as pager
+# NOTE: groff outputs ansi escape codes also, use this to fix it
+# see:      https://github.com/sharkdp/bat/issues/3053
+if which bat >/dev/null ; then
+    export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
+fi
+
 # http://cheat.sh cool website, can curl e.g. cheat.sh/tar
 cheat() {
     curl "http://cheat.sh/$@"
 }
 
+ALT_PROMPT="$ "
+pswap() {
+    # swap prompts
+    TMP="$PS1"
+    PS1="$ALT_PROMPT"
+    ALT_PROMPT="$TMP"
+}
+
+#  function errecho() {
+#    echo 1>&2 $@;  }
+
+
+# Helpers for finding/deleting/etc vim swap-files
+vimswap() {
+  USAGE="[usage]: vimswap find|show|load"
+
+  if [[ $# -gt 2 ]]; then
+    echo 1>&2 "Err: too many arguments to vimswap"
+    return -1
+  fi
+
+  if [[ $# -eq 0 || $1 == "find" || $1 == "ls" ]]; then
+    find . | egrep '.*.swp|.*.swo'
+    return 0
+  fi
+
+  if [[ $1 == "show" || $1 == "preview" ]]; then
+    find . | egrep ".*.swp" | sed -E "s/(.*\/).([^\/]*).swp$/\1\2/"
+    return 0
+  fi
+
+
+
+  if [[ $1 == "load" ]]; then
+    vim -p $(find . | egrep ".*.swp" | sed -E "s/(.*\/).([^\/]*).swp$/\1\2/" | xargs echo)
+    return
+  fi
+
+
+  if [[ $1 == "--help" ]]; then
+    echo "$USAGE"
+    return 0
+  fi
+
+  #else: got to end
+  echo 2>&1 "Error: unrecognized args"
+  echo 2>&1 "$USAGE"
+
+}
 
 
 

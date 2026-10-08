@@ -30,15 +30,14 @@ gather() {
     cp "$HOME_DIR/$source" "$SCRIPT_DIR/$dest"
 }
 
-echo Gathering all known configs from this system
+echo Gathering all known configs from this system:
 gather .  .bash_aliases
 gather .  .bashrc
 gather .  .gitconfig
 gather .  .gitignore_global
 gather .  .tmux.conf
 gather .  .vimrc
-# .config/ghostty/config.ghostty
-echo 'SKIPPING: config.ghostty  <=  ~/.config/ghostty/config.ghostty'
+gather config.ghostty       .config/ghostty/config.ghostty
 gather helix/config.toml    .config/helix/config.toml
 gather helix/languages.toml .config/helix/languages.toml
-echo "Done!"
+echo 'Done! (use "git status" or "git diff HEAD" to view changes)'

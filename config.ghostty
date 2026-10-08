@@ -1,11 +1,21 @@
-# Reload configs with
+# Reload configs with Ctrl+Shift+,
+
 theme = Neutron
+command = fish
 
 ### Bitmap font: only valid at size 12 I think
 #       https://github.com/the-moonwitch/Cozette
 # NOTE: 
-#font-family = "Cozette"
-#font-size = 12
+#   unfortunately is blurry
+#font-family = "Terminus"
+#   great, on bigger screen, but too small otherwise
+font-family = "Cozette"
+#font-family = "Ttyp0 OTB"
+# creep didn't work, .bdf format not recognized maybe?
+#font-family = "creep"
+# NOTE: if switching fonts fails, use Ctrl+0 to reset font size to default
+
+#font-size = 13
 
 # Alternative font:
-font-family = "Fira Code"
+#font-family = "Fira Code"
