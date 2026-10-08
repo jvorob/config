@@ -17,6 +17,9 @@ if [ ! -d "$HOME_DIR" ]; then
 fi
 
 # USAGE: gather TO FROM
+# TO is the in-repo location of the file
+# FROM is the actual on-system location of the config file, e.g. ~/.config/foo/foo.conf
+# both should be paths relative to either $HOME_DIR or $SCRIPT_DIR
 gather() {
     dest="$1"
     source="$2"
